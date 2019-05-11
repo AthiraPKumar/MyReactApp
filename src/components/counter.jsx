@@ -22,6 +22,7 @@ class Counter extends Component {
     // React.createElement('div');
     return (
       <div>
+        <div><img src={this.state.imageUrl}/></div>
         <div>
           <span style={this.styles} className={this.getBadgeClasses()}>
             {this.formatCount()}
@@ -32,7 +33,6 @@ class Counter extends Component {
         <div>
           {this.state.tags.length === 0 && <p>please create a new tag</p>}
          {this.rendeTags()}
-         <img src={this.state.imageUrl}/>
         </div>
       </div>
     );
