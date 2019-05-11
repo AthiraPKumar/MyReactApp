@@ -4,8 +4,8 @@ import React, { Component } from "react";
 class Counter extends Component {
   state = {
     count: 0,
-    tags: ['tag1','tag2','tag3']
-    // imageUrl: "https://picsum.photos/200"
+    tags: ['tag1','tag2','tag3'],
+    imageUrl: "https://picsum.photos/200"
   };
 
   styles = {
@@ -32,6 +32,7 @@ class Counter extends Component {
         <div>
           {this.state.tags.length === 0 && <p>please create a new tag</p>}
          {this.rendeTags()}
+         <img src={this.state.imageUrl}/>
         </div>
       </div>
     );
