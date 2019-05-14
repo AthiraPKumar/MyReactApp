@@ -3,8 +3,8 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
-    tags: ['tag1','tag2','tag3'],
+    value: this.props.value,
+    tags: ["tag1", "tag2", "tag3"],
     imageUrl: "https://picsum.photos/200"
   };
 
@@ -19,51 +19,70 @@ class Counter extends Component {
   // }
 
   render() {
+    console.log(this.props.children);
     // React.createElement('div');
     return (
       <div>
-        <div><img src={this.state.imageUrl}/></div>
+        <div>
+          {this.props.children}
+          <img src={this.state.imageUrl} />
+        </div>
         <div>
           <span style={this.styles} className={this.getBadgeClasses()}>
             {this.formatCount()}
           </span>
-          <button onClick={this.handleIncrement} className="btn btn-secondary btn-sm">Increment</button>
+          <button
+            onClick={(product) => this.handleIncrement(product)}
+            className="btn btn-secondary btn-sm"
+          >
+            Increment
+          </button>
         </div>
 
         <div>
           {this.state.tags.length === 0 && <p>please create a new tag</p>}
-         {this.rendeTags()}
+          {this.rendeTags()}
         </div>
       </div>
     );
   }
 
-  rendeTags(){
+  rendeTags() {
     //like conditional if & else methods stay here
 
-    if(this.state.tags.length === 0) return <p>No tags here!</p>;
+    console.log(this.props,'props');
 
-    return  <ul><li>{this.state.tags.map(tag => <li key={tag}>  {tag} </li>)} </li></ul>
+    if (this.state.tags.length === 0) return <p>No tags here!</p>;
+
+    return (
+      <ul>
+        <li>
+          {this.state.tags.map(tag => (
+            <li key={tag}> {tag} </li>
+          ))}{" "}
+        </li>
+      </ul>
+    );
   }
 
-  handleIncrement = () => {
+  handleIncrement = product => {
+    console.log(product,'event-id');
     // use arrow function to bind event handlers,normal function wont work
+    // this.state.count++;
+    this.setState({ value: this.state.value + 1 });
+  };
 
-    this.setState({ count: this.state.count + 1 });
-  }
+
 
   getBadgeClasses() {
-    let classes = "badge m-2 badge-";
-    classes += this.state.count === 0 ? "warning" : "primary";
+    let classes = "badge mr-4  ml-1 mt-2 badge-";
+    classes += this.state.value === 0 ? "warning" : "primary";
     return classes;
   }
 
   formatCount() {
-    return this.state.count === 0 ? "Zero" : this.state.count;
+    return this.state.value === 0 ? "Zero" : this.state.value;
   }
-
- 
-
 }
 
 export default Counter;
